@@ -1,0 +1,24 @@
+---
+- name: Install common packages
+  ansible.builtin.apt:
+    name:
+      - curl
+      - git
+      - ca-certificates
+    state: present
+    update_cache: true
+
+- name: Create application administrator user
+  ansible.builtin.user:
+    name: appadmin
+    state: present
+    shell: /bin/bash
+    create_home: true
+
+- name: Create application base directory
+  ansible.builtin.file:
+    path: /opt/apps
+    state: directory
+    owner: appadmin
+    group: appadmin
+    mode: "0755"

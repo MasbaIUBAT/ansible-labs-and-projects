@@ -1,0 +1,7 @@
+---
+- name: Apply common Linux configuration
+  hosts: managed_nodes
+  become: true
+
+  roles:
+    - common
