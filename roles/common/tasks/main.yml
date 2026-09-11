@@ -2,6 +2,7 @@
 - name: Install common packages
   ansible.builtin.apt:
     name:
+      - acl
       - curl
       - git
       - ca-certificates

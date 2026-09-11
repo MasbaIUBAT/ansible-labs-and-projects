@@ -1,0 +1,30 @@
+---
+- name: Install Node.js and npm
+  ansible.builtin.apt:
+    name:
+      - nodejs
+      - npm
+    state: present
+    update_cache: true
+
+- name: Install PM2 process manager
+  ansible.builtin.command:
+    cmd: npm install --global pm2
+    creates: /usr/local/bin/pm2
+
+- name: Create Node.js application directory
+  ansible.builtin.file:
+    path: "{{ nodejs_app_dir }}"
+    state: directory
+    owner: appadmin
+    group: appadmin
+    mode: "0755"
+
+- name: Deploy Node.js application
+  ansible.builtin.template:
+    src: app.js.j2
+    dest: "{{ nodejs_app_dir }}/app.js"
+    owner: appadmin
+    group: appadmin
+    mode: "0644"
+  notify: Restart Node.js application

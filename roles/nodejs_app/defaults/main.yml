@@ -1,0 +1,5 @@
+---
+nodejs_app_name: nodejs-demo
+nodejs_app_dir: /opt/apps/nodejs-demo
+nodejs_app_port: 3000
+nodejs_app_message: Hello from node01. Managed by Ansible!

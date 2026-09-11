@@ -1,0 +1,13 @@
+const http = require("http");
+
+const hostname = "0.0.0.0";
+const port = {{ nodejs_app_port }};
+
+const server = http.createServer((request, response) => {
+  response.writeHead(200, { "Content-Type": "text/plain" });
+  response.end("{{ nodejs_app_message }}\n");
+});
+
+server.listen(port, hostname, () => {
+  console.log("{{ nodejs_app_name }} is listening on port " + port);
+});

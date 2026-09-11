@@ -1,0 +1,8 @@
+---
+- name: Restart Node.js application
+  ansible.builtin.shell: |
+    /usr/local/bin/pm2 restart "{{ nodejs_app_name }}" || /usr/local/bin/pm2 start app.js --name "{{ nodejs_app_name }}"
+  args:
+    chdir: "{{ nodejs_app_dir }}"
+  become: true
+  become_user: appadmin

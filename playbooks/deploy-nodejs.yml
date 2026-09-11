@@ -1,0 +1,8 @@
+---
+- name: Deploy Node.js demo application
+  hosts: node01
+  become: true
+
+  roles:
+    - common
+    - nodejs_app
