@@ -1,0 +1,30 @@
+---
+- name: Deploy a protected application configuration
+  hosts: managed_nodes
+  become: true
+  vars_files:
+    - secrets.yml
+
+  tasks:
+    - name: Create the protected configuration
+      ansible.builtin.copy:
+        content: |
+          APP_DATABASE_PASSWORD={{ app_database_password }}
+          API_TOKEN={{ api_token }}
+        dest: /etc/ansible-lab/app.env
+        owner: root
+        group: root
+        mode: "0600"
+      no_log: true
+
+    - name: Check protected file permissions
+      ansible.builtin.stat:
+        path: /etc/ansible-lab/app.env
+      register: protected_file
+
+    - name: Confirm protected file mode
+      ansible.builtin.assert:
+        that:
+          - protected_file.stat.exists
+          - protected_file.stat.mode == "0600"
+        success_msg: Protected configuration deployed with mode 0600.

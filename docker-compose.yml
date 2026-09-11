@@ -1,0 +1,38 @@
+services:
+  ansible-control:
+    build:
+      context: .
+      dockerfile: docker/control/Dockerfile
+    container_name: ansible-control
+    hostname: ansible-control
+    volumes:
+      - ./:/workspace
+    tty: true
+
+  node01:
+    build:
+      context: .
+      dockerfile: docker/managed-node/Dockerfile
+    container_name: node01
+    hostname: node01
+
+  node02:
+    build:
+      context: .
+      dockerfile: docker/managed-node/Dockerfile
+    container_name: node02
+    hostname: node02
+
+  node03:
+    build:
+      context: .
+      dockerfile: docker/managed-node/Dockerfile
+    container_name: node03
+    hostname: node03
+
+  node04:
+    build:
+      context: .
+      dockerfile: docker/managed-node/Dockerfile
+    container_name: node04
+    hostname: node04

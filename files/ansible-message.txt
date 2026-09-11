@@ -1,0 +1,2 @@
+This file was deployed by Ansible.
+Environment=training

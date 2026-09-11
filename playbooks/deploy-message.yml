@@ -1,0 +1,26 @@
+---
+- name: Deploy a managed message file
+  hosts: managed_nodes
+  become: true
+
+  tasks:
+    - name: Create the application directory
+      ansible.builtin.file:
+        path: /etc/ansible-lab
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Copy the message file
+      ansible.builtin.copy:
+        src: /workspace/files/ansible-message.txt
+        dest: /etc/ansible-lab/message.txt
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Ensure the environment line exists
+      ansible.builtin.lineinfile:
+        path: /etc/ansible-lab/message.txt
+        line: Environment=training
